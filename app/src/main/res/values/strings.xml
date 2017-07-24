@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Listen 1</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">精选</string>
+    <string name="title_dashboard">歌单</string>
+    <string name="title_notifications">关于</string>
+</resources>
