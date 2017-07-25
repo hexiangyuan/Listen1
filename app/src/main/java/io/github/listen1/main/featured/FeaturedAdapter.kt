@@ -45,8 +45,6 @@ class FeaturedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val title = view.text!!
 
     fun onBind(featuredItem: FeaturedItem) {
-//        val imageWidth = (image.context.screenSize().first - 16 - 16 - 16) / 2 - 8
-//        image.layoutParams = ViewGroup.LayoutParams(imageWidth, imageWidth)
         ImageUtils.loadUrl(featuredItem.imageSrc, image)
         title.text = featuredItem.title
     }

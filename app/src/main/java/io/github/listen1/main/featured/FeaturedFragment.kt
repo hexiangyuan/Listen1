@@ -2,7 +2,6 @@ package io.github.listen1.main.featured
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -14,6 +13,9 @@ import kotlinx.android.synthetic.main.layout_refresh_recyclerview.*
 
 class FeaturedFragment : Fragment(), FeaturedContract.View {
     private lateinit var adapter: FeaturedAdapter
+    private lateinit var presenter: FeaturedContract.Presenter
+    private var page = 1
+    private var isLoadingMore = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +29,27 @@ class FeaturedFragment : Fragment(), FeaturedContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        val gridLayoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = gridLayoutManager
+        presenter = XiaMiFeaturedPresenter(this)
         adapter = FeaturedAdapter()
+        swipeLayout.setOnRefreshListener {
+            page = 1
+            presenter.onFreshLoadFeatured()
+        }
         recyclerView.adapter = adapter
-        val presenter: FeaturedContract.Presenter = XiaMiFeaturedPresenter(this)
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                val firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
+                val screenItemCount = gridLayoutManager.childCount
+                val totalCount = gridLayoutManager.itemCount
+                if (!isLoadingMore && dy > 0 && firstVisibleItem + screenItemCount >= totalCount - 4) {
+                    page++
+                    isLoadingMore = true
+                    presenter.loadMoreFeatured(page)
+                }
+            }
+        })
         presenter.onStart()
     }
 
@@ -46,6 +65,7 @@ class FeaturedFragment : Fragment(), FeaturedContract.View {
     }
 
     override fun loadMoreCompleted() {
+        isLoadingMore = false
     }
 
     override fun showLoading() {
@@ -62,9 +82,12 @@ class FeaturedFragment : Fragment(), FeaturedContract.View {
     }
 
     override fun featuredOnRefreshed(list: ArrayList<FeaturedItem>) {
+        adapter.setList(list)
+        swipeLayout.isRefreshing = false
     }
 
     override fun featuredOnLoadingMore(list: ArrayList<FeaturedItem>) {
+        adapter.addList(list)
     }
 
     override fun showErrorMsg(e: String) {
