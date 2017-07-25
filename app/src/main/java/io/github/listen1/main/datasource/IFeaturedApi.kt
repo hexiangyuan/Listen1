@@ -7,5 +7,5 @@ import io.github.listen1.main.modal.FeaturedItem
  * feature:
  */
 interface IFeaturedApi {
-    fun getFeaturedList(page:Int = 1):List<FeaturedItem>
+    fun getFeaturedList(page:Int = 1):ArrayList<FeaturedItem>
 }

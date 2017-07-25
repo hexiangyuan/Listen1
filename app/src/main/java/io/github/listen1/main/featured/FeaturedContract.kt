@@ -13,15 +13,19 @@ interface FeaturedContract {
 
         fun hideLoading()
 
-        fun featuredOnFirstLoaded(list: List<FeaturedItem>)
+        fun loadMoreStart()
+
+        fun loadMoreCompleted()
+
+        fun featuredOnFirstLoaded(list: ArrayList<FeaturedItem>)
 
         fun showEmptyPage()
 
-        fun featuredOnRefreshed(list: List<FeaturedItem>)
+        fun featuredOnRefreshed(list: ArrayList<FeaturedItem>)
 
-        fun featuredOnLoadingMore(list: List<FeaturedItem>)
+        fun featuredOnLoadingMore(list: ArrayList<FeaturedItem>)
 
-        fun showErrorMsg(e:String)
+        fun showErrorMsg(e: String)
     }
 
     interface Presenter {
@@ -29,7 +33,7 @@ interface FeaturedContract {
 
         fun onStop()
 
-        fun loadMoreFeatured(page:Int)
+        fun loadMoreFeatured(page: Int)
 
         fun onFreshLoadFeatured()
 

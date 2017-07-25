@@ -9,7 +9,7 @@ import org.jsoup.nodes.Document
  * feature:
  */
 class XiamiApi : IFeaturedApi {
-    override fun getFeaturedList(page: Int): List<FeaturedItem> {
+    override fun getFeaturedList(page: Int): ArrayList<FeaturedItem> {
         try {
             val document: Document = Jsoup.connect("http://www.xiami.com/collect/recommend/page/$page").get()
             val liList = document.select("div.collectBlock_list").select("ul").select("li")
