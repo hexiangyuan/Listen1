@@ -77,6 +77,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        setSupportActionBar(toolBar)
         featuredFragment = supportFragmentManager.findFragmentByTag("featured") as FeaturedFragment?
         aboutFragment = supportFragmentManager.findFragmentByTag("collection") as AboutFragment?
         collectionFragment = supportFragmentManager.findFragmentByTag("about") as CollectionFragment?
@@ -85,6 +86,5 @@ class HomeActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().add(R.id.content, featuredFragment, "featured").commit()
             currentFragment = featuredFragment
         }
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 }
