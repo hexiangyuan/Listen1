@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.listen1.R
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 
 class FeaturedFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,14 +20,6 @@ class FeaturedFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Thread({
-            try {
-                val document:Document = Jsoup.connect("http://www.xiami.com/collect/recommend/page/1").get()
-                val elements = document.select("block_list clearfix")
-            }catch (e:Exception){
-
-            }
-        }).start()
     }
 
     companion object {
