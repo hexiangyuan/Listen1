@@ -38,14 +38,15 @@ class FeaturedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FeaturedViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_featured_item, parent, false))
     }
-}
 
-class FeaturedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val image = view.image!!
-    val title = view.text!!
+    class FeaturedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val image = view.image!!
+        val title = view.text!!
 
-    fun onBind(featuredItem: FeaturedItem) {
-        ImageUtils.loadUrl(featuredItem.imageSrc, image)
-        title.text = featuredItem.title
+        fun onBind(featuredItem: FeaturedItem) {
+            ImageUtils.loadUrl(featuredItem.imageSrc, image)
+            title.text = featuredItem.title
+        }
     }
 }
+

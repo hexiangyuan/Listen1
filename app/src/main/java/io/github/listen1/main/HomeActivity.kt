@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import io.github.listen1.R
 import io.github.listen1.main.featured.AboutFragment
 import io.github.listen1.main.featured.CollectionFragment
+import io.github.listen1.main.featured.Featured1Fragment
 import io.github.listen1.main.featured.FeaturedFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -69,7 +70,7 @@ class HomeActivity : AppCompatActivity() {
         false
     }
 
-    private var featuredFragment: FeaturedFragment? = null
+    private var featuredFragment: Featured1Fragment? = null
     private var aboutFragment: AboutFragment? = null
     private var collectionFragment: CollectionFragment? = null
     private var currentFragment: Fragment? = null
@@ -78,11 +79,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolBar)
-        featuredFragment = supportFragmentManager.findFragmentByTag("featured") as FeaturedFragment?
+        featuredFragment = supportFragmentManager.findFragmentByTag("featured") as Featured1Fragment?
         aboutFragment = supportFragmentManager.findFragmentByTag("collection") as AboutFragment?
         collectionFragment = supportFragmentManager.findFragmentByTag("about") as CollectionFragment?
         if (featuredFragment == null) {
-            featuredFragment = FeaturedFragment.newInstance()
+            featuredFragment = Featured1Fragment.newInstance()
             supportFragmentManager.beginTransaction().add(R.id.content, featuredFragment, "featured").commit()
             currentFragment = featuredFragment
         }
