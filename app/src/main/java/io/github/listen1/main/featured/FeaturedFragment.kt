@@ -6,8 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.listen1.R
+import io.github.listen1.main.modal.FeaturedItem
 
-class FeaturedFragment : Fragment() {
+class FeaturedFragment : Fragment(),FeaturedContract.View {
+
+    override fun showLoading() {
+    }
+
+    override fun hideLoading() {
+    }
+
+    override fun featuredOnFirstLoaded(list: List<FeaturedItem>) {
+    }
+
+    override fun showEmptyPage() {
+    }
+
+    override fun featuredOnRefreshed(list: List<FeaturedItem>) {
+    }
+
+    override fun featuredOnLoadingMore(list: List<FeaturedItem>) {
+    }
+
+    override fun showErrorMsg(e: String) {
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,6 +43,8 @@ class FeaturedFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val presenter:FeaturedContract.Presenter = XiaMiFeatruredPresenter(this)
+        presenter.onStart()
     }
 
     companion object {
